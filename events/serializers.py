@@ -4,8 +4,20 @@ from .models import Event, EventRegistration
 
 class EventSerializer(serializers.ModelSerializer):
     organizer = serializers.PrimaryKeyRelatedField(
-        read_only=True  # ← makes organizer read-only, cannot be set in input
+        read_only=True  
     )
+
+    
+    def validate(self, data):
+        if Event.objects.filter(
+            title=data['title'],
+            date=data['date'],
+            location=data['location']
+        ).exists():
+            raise serializers.ValidationError(
+                "An event with the same title, date, and location already exists."
+            )
+        return data
 
     class Meta:
         model = Event

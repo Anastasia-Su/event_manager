@@ -1,5 +1,6 @@
 from rest_framework import permissions
 
+
 class IsOrganizerOrReadOnly(permissions.BasePermission):
     """
     Only the organizer of the event can edit or delete it.
