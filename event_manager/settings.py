@@ -17,9 +17,6 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-for k in ["POSTGRES_HOST", "POSTGRES_DB", "POSTGRES_USER", "POSTGRES_PASSWORD"]:
-    print(k, repr(os.getenv(k)))
-
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 

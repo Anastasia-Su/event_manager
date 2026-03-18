@@ -1,7 +1,7 @@
 from datetime import datetime, timezone
 from typing import Any
 
-from rest_framework import generics, status, status
+from rest_framework import generics, status
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -148,9 +148,6 @@ class LogoutView(APIView):
                 status=status.HTTP_400_BAD_REQUEST,
             )
         except Exception as e:
-            import traceback
-
-            print(traceback.format_exc())
             return Response(
                 {"detail": f"Logout failed. Please try again. {str(e)}"},
                 status=status.HTTP_400_BAD_REQUEST,

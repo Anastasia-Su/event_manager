@@ -13,7 +13,7 @@ class EventSerializer(serializers.ModelSerializer):
     """
 
     organizer = serializers.PrimaryKeyRelatedField(read_only=True)
-    
+
     def validate_date(self, value: timezone.datetime) -> timezone.datetime:
         """
         Ensure the event date is not in the past.

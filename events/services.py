@@ -29,7 +29,6 @@ def send_registration_email(event: Event, user: User) -> None:
     )
 
 
-
 def send_cancellation_email(event: Event, user: User) -> None:
     """
     Send a confirmation email to the user after registration for an event is cancelled.
@@ -51,7 +50,7 @@ def send_cancellation_email(event: Event, user: User) -> None:
         [user.email],
         fail_silently=True,
     )
-    
+
 
 def register_user_to_event(event: Event, user: User) -> EventRegistration:
     """Register a user for an event or raise exception if already registered."""

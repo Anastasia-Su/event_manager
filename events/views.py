@@ -221,7 +221,7 @@ class EventViewSet(viewsets.ModelViewSet):
         registrations = EventRegistration.objects.filter(
             user=request.user
         ).select_related("event")
-        
+
         serializer = EventRegistrationSerializer(registrations, many=True)
 
         return Response(serializer.data, status=status.HTTP_200_OK)
