@@ -1,5 +1,6 @@
 from typing import Any
 from rest_framework import serializers
+from django.utils import timezone
 from .models import Event, EventRegistration
 
 
@@ -7,10 +8,23 @@ class EventSerializer(serializers.ModelSerializer):
     """
     Serializer for Event model.
     Handles validation to prevent duplicate events
-    with the same title, date, and location.
+    with the same title, date, and location,
+    and ensures events cannot be created in the past.
     """
 
     organizer = serializers.PrimaryKeyRelatedField(read_only=True)
+    
+    def validate_date(self, value: timezone.datetime) -> timezone.datetime:
+        """
+        Ensure the event date is not in the past.
+        Allows events starting today (even if already started).
+        """
+        if value < timezone.now():
+            raise serializers.ValidationError(
+                "Event date cannot be in the past. "
+                "Events can only be created for today or in the future."
+            )
+        return value
 
     def validate(self, data: dict[str, Any]) -> dict[str, Any]:
         """Validate that no duplicate event exists."""

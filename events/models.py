@@ -37,4 +37,4 @@ class EventRegistration(models.Model):
         constraints = [
             models.UniqueConstraint(fields=("user", "event"), name="unique_register")
         ]
-        ordering = ["-registered_at"]
+        ordering = ["event__date"]
