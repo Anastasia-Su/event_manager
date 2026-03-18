@@ -11,6 +11,7 @@ def send_account_activation_email(user: UserType) -> None:
 
     token_obj = ActivationToken.create_for_user(user)
     activation_url = f"http://127.0.0.1:8000/user/activate/?token={token_obj.token}&email={user.email}"
+
     message = f"Click to activate your account:\n\n{activation_url}"
 
     send_mail(
