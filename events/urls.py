@@ -8,7 +8,6 @@ router.register("", EventViewSet, basename="events")
 
 urlpatterns = [
     path("", include(router.urls)),
-
 ]
 
 app_name = "events"

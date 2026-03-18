@@ -9,6 +9,7 @@ User = get_user_model()
 
 fake = Faker()
 
+
 class Command(BaseCommand):
     help = "Populate database with demo users and events using Faker"
 
@@ -18,8 +19,7 @@ class Command(BaseCommand):
         for i in range(1, 6):
             email = f"user{i}@test.com"
             user, created = User.objects.get_or_create(
-                email=email,
-                defaults={"is_active": True}
+                email=email, defaults={"is_active": True}
             )
             if created:
                 user.set_password("Password123")
@@ -27,7 +27,7 @@ class Command(BaseCommand):
             users.append(user)
         self.stdout.write(self.style.SUCCESS(f"Created {len(users)} users."))
 
-        # --- Create 20 unique events ---
+        # --- Create 100 unique events ---
         used_titles = set()
         for _ in range(100):
             # Ensure unique event title
@@ -42,14 +42,16 @@ class Command(BaseCommand):
             location = fake.city()
             organizer = random.choice(users)
 
-            event, created = Event.objects.get_or_create(
+            _, created = Event.objects.get_or_create(
                 title=title,
                 date=date,
                 location=location,
                 defaults={
                     "description": description,
                     "organizer": organizer,
-                }
+                },
             )
 
-        self.stdout.write(self.style.SUCCESS("Populated 100 unique events successfully."))
+        self.stdout.write(
+            self.style.SUCCESS("Populated 100 unique events successfully.")
+        )

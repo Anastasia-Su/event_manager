@@ -7,7 +7,7 @@ from .exceptions import AlreadyRegisteredError
 
 def send_registration_email(event: Event, user: User) -> None:
     """
-    Send a confirmation email to the user after successful registration.
+    Send a confirmation email to the user after successful registration for an event.
     Email delivery failures are silently ignored (best-effort delivery).
     """
 
