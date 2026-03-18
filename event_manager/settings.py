@@ -212,3 +212,7 @@ SIMPLE_JWT = {
 }
 
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+
+# Uncomment it to save emails to a file
+# EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"
+# EMAIL_FILE_PATH = BASE_DIR / "sent_emails"

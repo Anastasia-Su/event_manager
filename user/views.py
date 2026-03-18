@@ -26,7 +26,6 @@ from .serializers import RegisterSerializer, ActivationSerializer, LogoutSeriali
         201: RegisterSerializer,
         400: OpenApiResponse(description="Validation error or passwords do not match"),
     },
-    tags=["auth"],
 )
 class RegisterUserView(generics.CreateAPIView):
     """
@@ -61,7 +60,6 @@ class RegisterUserView(generics.CreateAPIView):
         200: OpenApiResponse(description="Account successfully activated"),
         400: OpenApiResponse(description="Invalid or expired token / email"),
     },
-    tags=["auth"],
 )
 class ActivateView(generics.GenericAPIView):
     """
@@ -90,7 +88,6 @@ class ActivateView(generics.GenericAPIView):
         205: OpenApiResponse(description="Successfully logged out"),
         400: OpenApiResponse(description="Invalid or missing token"),
     },
-    tags=["auth"],
 )
 class LogoutView(APIView):
     """
