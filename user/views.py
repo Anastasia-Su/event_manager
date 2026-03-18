@@ -17,34 +17,19 @@ from rest_framework_simplejwt.exceptions import TokenError
 from rest_framework_simplejwt.token_blacklist.models import BlacklistedToken, OutstandingToken
 
 
-# class RegisterView(generics.CreateAPIView):
-#     serializer_class = RegisterSerializer
-#     permission_classes = [AllowAny]
-    
-#     def perform_create(self, serializer):
-#         serializer.save()
-
-from drf_spectacular.utils import extend_schema
-
-# from drf_spectacular.utils import extend_schema
+from drf_spectacular.utils import extend_schema, OpenApiParameter
+from rest_framework import generics, status
+from rest_framework.response import Response
+from rest_framework.permissions import AllowAny
+from .serializers import ActivationSerializer
 
 
 # @extend_schema(request=RegisterSerializer, responses=RegisterSerializer)
 class RegisterUserView(generics.CreateAPIView):
     serializer_class = RegisterSerializer
 
-    # def create(self, request, *args, **kwargs):
-    #     response = super().create(request, *args, **kwargs)
-        
-    #     return response
 
 
-
-from drf_spectacular.utils import extend_schema, OpenApiParameter
-from rest_framework import generics, status
-from rest_framework.response import Response
-from rest_framework.permissions import AllowAny
-from .serializers import ActivationSerializer
 
 class ActivateView(generics.GenericAPIView):
     serializer_class = ActivationSerializer
@@ -77,18 +62,6 @@ class ActivateView(generics.GenericAPIView):
         return Response({"message": "Account activated."}, status=status.HTTP_200_OK)
 
 
-# # Optional: customize login response (add user info if needed)
-# class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
-#     @classmethod
-#     def get_token(cls, user):
-#         token = super().get_token(user)
-#         token["email"] = user.email
-#         return token
-
-
-# class LoginView(TokenObtainPairView):
-#     serializer_class = CustomTokenObtainPairSerializer
-#     permission_classes = [AllowAny]
 
 
 class LogoutView(APIView):

@@ -33,7 +33,7 @@ class EventSerializer(serializers.ModelSerializer):
 
 class EventRegistrationSerializer(serializers.ModelSerializer):
     user = serializers.PrimaryKeyRelatedField(read_only=True)
-    event = serializers.PrimaryKeyRelatedField(read_only=True)
+    event = EventSerializer(read_only=True)
     
     class Meta:
         model = EventRegistration
